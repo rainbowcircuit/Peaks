@@ -297,7 +297,7 @@ void PeaksAudioProcessorEditor::resized()
     
     //==============================================================================
     // lfo
-    lfoModeSlider.setBounds(12, 182, 60, 15);
+    lfoModeSlider.setBounds(12, 182, 50, 15);
     lfoRateHzSlider.setBounds(60, 182, 60, 15);
     lfoRateBPMSlider.setBounds(60, 182, 60, 15);
     lfoRateRatioSlider.setBounds(60, 182, 60, 15);

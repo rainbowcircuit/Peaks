@@ -25,13 +25,11 @@ void MainGraphics::paint(juce::Graphics& g)
     
     auto rectNoBounds = getLocalBounds().toFloat();
     auto bounds = rectNoBounds.reduced(8.0f, 8.0f);
+    float peakWidthScaling = bounds.getWidth() * 0.6f;
+    float peakCurveOffset = bounds.getWidth() * (0.025 + (0.025 * (1.0f - resonance/100.0f)));
 
-    
     for (int i = 0; i < 8; ++i){
-        float peakWidthScaling = bounds.getWidth() * 0.6f;
-        float peakCurveOffset = bounds.getWidth() * (0.025 + (0.025 * (1.0f - resonance/100.0f)));
         float peakCenterLevel = peakLevelMeasurement[i] * 40.0f;
-        
         float peakPositionX = (bounds.getWidth() * 0.1f) + (peakWidthScaling * ratioValNormalized[i]);
         float peakPositionY = (bounds.getHeight() * (0.95f - ampValNormalized[i] * 0.85f)); // offset affine transform
         
@@ -53,6 +51,7 @@ void MainGraphics::paint(juce::Graphics& g)
             visualizerPath.lineTo(peakBottomRight[0], peakBottomRight[1]);
             visualizerPath = visualizerPath.createPathWithRoundedCorners(30.0f);
             
+
         } else {
             visualizerOffPath.startNewSubPath(peakBottomLeft[0], peakBottomLeft[1]);
             visualizerOffPath.lineTo(peakCenterLeft[0], peakCenterLeft[1]);
@@ -76,22 +75,20 @@ void MainGraphics::paint(juce::Graphics& g)
     g.setColour(offColor);
     g.fillPath(visualizerOffPath);
 
-    
-
 }
 
 void MainGraphics::ratioValues()
 {
-    std::array<float, 8> ratioVal;
+ //   std::array<float, 8> ratioVal;
 
     float scaleScaled = (scale * 0.1f) + 1.0f;
     for (int i = 0; i < 8; i++) {
         ratioVal[i] = std::pow(i + 1, scaleScaled) + offset;
         
+        // mode
         if (latch){
             ratioVal[0] = 1.0f;
         }
-        
         if (ratioVal[i] <= 1.0f) {
             ratioVal[i] = 1.0f;
         }
@@ -188,7 +185,7 @@ void LFOGraphics::updateValues(float newMode, float newRateInHz, float newRateIn
     lfoRate = newRateInHz/100.0f;
     
     if (newMode == 1){
-        lfoRate = newRateInBPM/16.0f;
+        lfoRate = 1.0f - newRateInBPM/16.0f;
         
     } else if (newMode== 2){
         lfoRate = newRateInRatio/15.0f;

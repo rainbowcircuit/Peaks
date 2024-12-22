@@ -417,7 +417,7 @@ void OrangeDialGraphics::drawRotarySlider(juce::Graphics& g, int x, int y, int w
         g.setFont(Fonts::getFont(20.0f));
         g.drawText(display, bounds.getX(), bounds.getY() - 4, bounds.getWidth(), bounds.getHeight(), juce::Justification::centred);
         
-        g.setFont(bounds.getWidth() * 0.15f);
+        g.setFont(Fonts::getFont(13.0f));
         g.drawText("+" + juce::String(noteCents) + " ct", bounds.getCentreX() - 20,
                    bounds.getCentreY() + 2, 40,
                    20, juce::Justification::centred);

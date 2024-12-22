@@ -40,6 +40,7 @@ private:
     juce::Atomic<bool> parametersChanged { false };
     //==============================================================================
     std::array<std::atomic<float>, 8>& _bandLevel;
+    std::array<float, 8> ratioVal;
     std::array<float, 8> ratioValNormalized;
     std::array<float, 8> ampValNormalized;
 
