@@ -1,5 +1,5 @@
-
-#include "MainGraphics.h"
+#include <JuceHeader.h>
+#include "DisplayGraphics.h"
 
 MainGraphics::MainGraphics(std::array<std::atomic<float>, 8>& _bandLevel) : _bandLevel(_bandLevel)
 {
@@ -18,10 +18,6 @@ MainGraphics::~MainGraphics()
     }
 }
 
-
-//==============================================================================
-
-
 void MainGraphics::paint(juce::Graphics& g)
 {
     
@@ -33,7 +29,7 @@ void MainGraphics::paint(juce::Graphics& g)
     
     for (int i = 0; i < 8; ++i){
         float peakWidthScaling = bounds.getWidth() * 0.6f;
-        float peakCurveOffset = bounds.getWidth() * (0.025 + (0.025 * (1.0f - resonance/100.0f))); 
+        float peakCurveOffset = bounds.getWidth() * (0.025 + (0.025 * (1.0f - resonance/100.0f)));
         float peakCenterLevel = peakLevelMeasurement[i] * 40.0f;
         
         float peakPositionX = (bounds.getWidth() * 0.1f) + (peakWidthScaling * ratioValNormalized[i]);
@@ -72,8 +68,8 @@ void MainGraphics::paint(juce::Graphics& g)
     visualizerPath.applyTransform(transform);
     visualizerOffPath.applyTransform(transform);
 
-    juce::Colour onColor(juce::Colour(233, 193, 89));
-    juce::Colour offColor(juce::Colour(233, 193, 89).withAlpha(0.35f));
+    juce::Colour onColor(Colours::baseYellow);
+    juce::Colour offColor(Colours::baseYellow.withAlpha(0.45f));
 
     g.setColour(onColor);
     g.fillPath(visualizerPath);
@@ -83,8 +79,6 @@ void MainGraphics::paint(juce::Graphics& g)
     
 
 }
-
-//==============================================================================
 
 void MainGraphics::ratioValues()
 {
@@ -128,8 +122,6 @@ void MainGraphics::ampValues()
     }
 }
 
-//==============================================================================
-
 void MainGraphics::updateValues(int newPartials, float newResonance, float newScale, float newOffset, float newRound, float newAmp, bool newLatch)
 {
     partials = newPartials;
@@ -150,3 +142,85 @@ void MainGraphics::parameterValueChanged(int parameterIndex, float newValue)
 {
     parametersChanged.set(true);
 }
+
+LFOGraphics::LFOGraphics()
+{
+    const auto& params = audioProcessor.getParameters();
+    for (auto param : params){
+        param->addListener(this);
+    }
+}
+
+LFOGraphics::~LFOGraphics()
+{
+    const auto& params = audioProcessor.getParameters();
+    for (auto param : params){
+        param->removeListener(this);
+    }
+}
+
+void LFOGraphics::paint(juce::Graphics& g)
+{
+    auto rectNoBounds = getLocalBounds().toFloat();
+    auto bounds = rectNoBounds.reduced(10.0f, 10.0f);
+    //==============================================================================
+    juce::Path graphicsPath;
+    
+    float twoPi = 2.0f * juce::MathConstants<float>::pi;
+    graphicsPath.startNewSubPath(bounds.getX(), bounds.getCentreY());
+        
+    for (int i = 1; i < bounds.getWidth() - 2; i++){
+        
+        float waveform = (lfoAmp/100.0f) * sin((twoPi * (lfoRate * 20.0f + 5.0f) * i/bounds.getWidth()));
+        graphicsPath.lineTo(bounds.getX() + i * 2, bounds.getCentreY() + waveform * (bounds.getHeight()/2));
+        
+    }
+    graphicsPath = graphicsPath.createPathWithRoundedCorners(2.0f);
+    juce::PathStrokeType waveformStroke(2.0f, juce::PathStrokeType::curved, juce::PathStrokeType::rounded);
+    g.setColour(Colours::baseYellow);
+    g.strokePath(graphicsPath, waveformStroke);
+    
+}
+
+void LFOGraphics::updateValues(float newMode, float newRateInHz, float newRateInBPM, float newRateInRatio, float newAmp)
+{
+    
+    lfoRate = newRateInHz/100.0f;
+    
+    if (newMode == 1){
+        lfoRate = newRateInBPM/16.0f;
+        
+    } else if (newMode== 2){
+        lfoRate = newRateInRatio/15.0f;
+        
+    }
+    
+    lfoAmp = newAmp;
+    lfoMode = newMode;
+    repaint();
+}
+
+void LFOGraphics::parameterValueChanged(int parameterIndex, float newValue)
+{
+    parametersChanged.set(true);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

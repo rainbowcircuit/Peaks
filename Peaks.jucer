@@ -7,32 +7,31 @@
               cppLanguageStandard="20">
   <MAINGROUP id="R1vQal" name="Peaks">
     <GROUP id="{D93AD8A8-D12E-BDD8-0865-A9257E5763E6}" name="Source">
-      <GROUP id="{334A8585-CC48-EAD7-DD1F-1EE3972EC96A}" name="Utility">
-        <FILE id="jqMish" name="LFO.h" compile="0" resource="0" file="Source/LFO.h"/>
-        <FILE id="Nrbkom" name="Utility.h" compile="0" resource="0" file="Source/Utility.h"/>
+      <GROUP id="{D5EBE754-F1DC-E4A3-67EA-C9AA263BA7D0}" name="Assets">
+        <FILE id="vwmEbM" name="Lato-Medium.ttf" compile="0" resource="1" file="../../Downloads/Lato2OFL/Lato-Medium.ttf"/>
+        <FILE id="ojJ88S" name="Lato-Regular.ttf" compile="0" resource="1"
+              file="../../Downloads/Lato2OFL/Lato-Regular.ttf"/>
       </GROUP>
       <GROUP id="{A82784E7-BC6E-769D-33B2-B2C7F6AA1475}" name="DSP">
+        <FILE id="Ibrtgy" name="Peaks.cpp" compile="1" resource="0" file="Source/Peaks.cpp"/>
+        <FILE id="Qw0ds3" name="Peaks.h" compile="0" resource="0" file="Source/Peaks.h"/>
         <FILE id="sXUoaW" name="StateVariableFilter.cpp" compile="1" resource="0"
               file="Source/StateVariableFilter.cpp"/>
         <FILE id="UBlHot" name="StateVariableFilter.h" compile="0" resource="0"
               file="Source/StateVariableFilter.h"/>
-        <FILE id="WaEvlu" name="DelayLine.h" compile="0" resource="0" file="Source/DelayLine.h"/>
-        <FILE id="SZypN0" name="DelayLine.cpp" compile="1" resource="0" file="Source/DelayLine.cpp"/>
+        <FILE id="jqMish" name="LFO.h" compile="0" resource="0" file="Source/LFO.h"/>
+        <FILE id="Nrbkom" name="Utility.h" compile="0" resource="0" file="Source/Utility.h"/>
       </GROUP>
       <GROUP id="{536DE79A-2E96-F0D0-C8A3-280F316BB269}" name="Graphics">
-        <FILE id="nB6SzH" name="Partials.h" compile="0" resource="0" file="Source/Partials.h"/>
-        <FILE id="WCL3Cc" name="Graphics.cpp" compile="1" resource="0" file="Source/Graphics.cpp"/>
-        <FILE id="isN0g7" name="Graphics.h" compile="0" resource="0" file="Source/Graphics.h"/>
-        <FILE id="zkahZi" name="Miscellaneous.h" compile="0" resource="0" file="Source/Miscellaneous.h"/>
-        <FILE id="bqyPvg" name="MainGraphics.cpp" compile="1" resource="0"
-              file="Source/MainGraphics.cpp"/>
-        <FILE id="f1jfmt" name="MainGraphics.h" compile="0" resource="0" file="Source/MainGraphics.h"/>
-        <FILE id="yvrHYF" name="Structure.h" compile="0" resource="0" file="Source/Structure.h"/>
-        <FILE id="mtheJW" name="Resonance.h" compile="0" resource="0" file="Source/Resonance.h"/>
-        <FILE id="IsTrRb" name="Position.h" compile="0" resource="0" file="Source/Position.h"/>
-        <FILE id="iQwMFR" name="Slider.h" compile="0" resource="0" file="Source/Slider.h"/>
-        <FILE id="HcJyeV" name="Buttons.h" compile="0" resource="0" file="Source/Buttons.h"/>
-        <FILE id="LtP675" name="Dials.h" compile="0" resource="0" file="Source/Dials.h"/>
+        <FILE id="imelDw" name="UserInterfaceGraphics.cpp" compile="1" resource="0"
+              file="Source/UserInterfaceGraphics.cpp"/>
+        <FILE id="Ajhba9" name="UserInterfaceGraphics.h" compile="0" resource="0"
+              file="Source/UserInterfaceGraphics.h"/>
+        <FILE id="WCL3Cc" name="DisplayGraphics.cpp" compile="1" resource="0"
+              file="Source/DisplayGraphics.cpp"/>
+        <FILE id="isN0g7" name="DisplayGraphics.h" compile="0" resource="0"
+              file="Source/DisplayGraphics.h"/>
+        <FILE id="zkahZi" name="MiscGraphics.h" compile="0" resource="0" file="Source/MiscGraphics.h"/>
         <FILE id="bHK7yu" name="LookAndFeel.cpp" compile="1" resource="0" file="Source/LookAndFeel.cpp"/>
         <FILE id="DYmI2o" name="LookAndFeel.h" compile="0" resource="0" file="Source/LookAndFeel.h"/>
       </GROUP>
@@ -43,8 +42,6 @@
       <FILE id="dlTIDl" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="ngzsjg" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
-      <FILE id="Ibrtgy" name="Peaks.cpp" compile="1" resource="0" file="Source/Peaks.cpp"/>
-      <FILE id="Qw0ds3" name="Peaks.h" compile="0" resource="0" file="Source/Peaks.h"/>
       <FILE id="L1eSLl" name="EarProtection.h" compile="0" resource="0" file="Source/EarProtection.h"/>
     </GROUP>
   </MAINGROUP>
@@ -88,5 +85,26 @@
         <MODULEPATH id="juce_dsp" path="../../../../JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
+    <VS2022 targetFolder="Builds/VisualStudio2022">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="~/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="~/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="~/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="~/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="~/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="~/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="~/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="~/JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="~/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="~/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="~/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="~/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="~/JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2022>
   </EXPORTFORMATS>
 </JUCERPROJECT>

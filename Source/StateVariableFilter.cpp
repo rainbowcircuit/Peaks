@@ -9,7 +9,7 @@ void SVF::setSampleRate(float sampleRate)
 
 void SVF::setCoefficients(float freq, float Q)
 {
-    g = fastTan.tan(M_PI * freq / sampleRate);
+    g = tan(juce::MathConstants<float>::pi * freq / sampleRate);
     k = 1.0f / Q;
     a1 = 1.0f / (1.0f + g * (g + k));
     a2 = g * a1;

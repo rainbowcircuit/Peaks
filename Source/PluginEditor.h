@@ -4,16 +4,10 @@
 #include "PluginProcessor.h"
 #include "Peaks.h"
 
-#include "MainGraphics.h"
-#include "Graphics.h"
-#include "Structure.h"
-#include "Position.h"
-#include "Resonance.h"
-#include "Slider.h"
-#include "Dials.h"
-#include "Buttons.h"
-#include "Miscellaneous.h"
-#include "Partials.h"
+#include "DisplayGraphics.h"
+#include "UserInterfaceGraphics.h"
+#include "MiscGraphics.h"
+#include "LookAndFeel.h"
 //==============================================================================
 
 class PeaksAudioProcessorEditor : public juce::AudioProcessorEditor, private juce::AudioProcessorParameter::Listener
@@ -55,7 +49,6 @@ private:
         freqGraphic { false }, transGraphic { true };
     GreyDialGraphics dialGraphic;
     RoundGraphics roundGraphic;
-    PositionGraphics posGraphic;
     ResonanceGraphics resGraphic;
     StructureGraphics structGraphic;
     LatchGraphics latchGraphic;
@@ -75,8 +68,7 @@ private:
     juce::Label
         peaksLabel, transLabel, resLabel, structLabel, mixLabel, partialsLabel, ampLabel, rateLabel;
     
-    Graphics
-        posSlider { 65, 65, "Position", posGraphic},
+    GUIGraphics
         freqSlider { 100, 100, "Frequency", freqGraphic },
         scaleSlider { 40, 55, "Scale", dialGraphic },
         offsetSlider { 40, 55, "Offset", dialGraphic },

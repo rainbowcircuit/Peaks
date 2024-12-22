@@ -165,7 +165,6 @@ void PeaksAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
 
     float resonance = apvts.getRawParameterValue("resonance")->load();
     
-    float position = apvts.getRawParameterValue("position")->load();
 
     float structure = apvts.getRawParameterValue("structure")->load();
     smoothedStructure.setTargetValue(structure);
@@ -191,7 +190,7 @@ void PeaksAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::
 
     for (int voice = 0; voice < 4; ++voice){
         peaksVoice[voice].setRatioValues(scale, offset, round);
-        peaksVoice[voice].setStiffnessValues(position, structSmoothed);
+        peaksVoice[voice].setStructValues(structSmoothed);
         peaksVoice[voice].setFMValues(lfoMode, lfoInHz, lfoInBPM, lfoInRatio, lfoDepth);
     }
 
@@ -315,11 +314,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout
     layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "resonance", 1},
                                                             "Resonance",
                                                             juce::NormalisableRange<float> { 0.0f, 100.0f, 0.1f, 0.5f }, 25.0f));
-            
-    layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "position", 1},
-                                                            "Position",
-                                                            juce::NormalisableRange<float> { 0.0f, 100.0f, 0.1f }, 50.0f));
-        
+                    
     layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "structure", 1},
                                                             "Structure",
                                                             juce::NormalisableRange<float> { 0.0f, 100.0f, 0.1f }, 100.0f));
@@ -345,7 +340,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout
         
     layout.add(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { "lfoInHz", 1},
                                                             "LFO Rate Hz",
-                                                            juce::NormalisableRange<float> { 0.0f, 100.0f, 0.1f, 0.25 }, 0.0f));
+                                                            juce::NormalisableRange<float> { 0.5f, 100.0f, 0.1f, 0.25 }, 0.0f));
         
     layout.add(std::make_unique<juce::AudioParameterChoice>(juce::ParameterID { "lfoInBPM", 1},
                                                             "LFO Rate BPM",

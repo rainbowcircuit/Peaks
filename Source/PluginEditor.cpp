@@ -21,7 +21,7 @@ PeaksAudioProcessorEditor::PeaksAudioProcessorEditor (PeaksAudioProcessor& p, Pe
     mixLabel.setText("Mix", juce::dontSendNotification);
     mixLabel.setJustificationType(juce::Justification::right);
     mixLabel.setColour(juce::Label::textColourId, juce::Colour(180, 180, 180));
-    mixLabel.setFont(12.0f);
+    mixLabel.setFont(Fonts::getFont(13.0f));
     
     //==============================================================================
     // latch, stereo, and input
@@ -55,7 +55,7 @@ PeaksAudioProcessorEditor::PeaksAudioProcessorEditor (PeaksAudioProcessor& p, Pe
     partialsLabel.setText("Partials", juce::dontSendNotification);
     partialsLabel.setJustificationType(juce::Justification::right);
     partialsLabel.setColour(juce::Label::textColourId, juce::Colour(180, 180, 180));
-    partialsLabel.setFont(12.0f);
+    partialsLabel.setFont(Fonts::getFont(13.0f));
     
     // resonance
     addAndMakeVisible(resSlider);
@@ -71,7 +71,7 @@ PeaksAudioProcessorEditor::PeaksAudioProcessorEditor (PeaksAudioProcessor& p, Pe
     resLabel.setText("Resonance", juce::dontSendNotification);
     resLabel.setJustificationType(juce::Justification::right);
     resLabel.setColour(juce::Label::textColourId, juce::Colour(180, 180, 180));
-    resLabel.setFont(12.0f);
+    resLabel.setFont(Fonts::getFont(13.0f));
 
     // structure
     addAndMakeVisible(structSlider);
@@ -87,7 +87,7 @@ PeaksAudioProcessorEditor::PeaksAudioProcessorEditor (PeaksAudioProcessor& p, Pe
     structLabel.setText("Structure", juce::dontSendNotification);
     structLabel.setJustificationType(juce::Justification::right);
     structLabel.setColour(juce::Label::textColourId, juce::Colour(180, 180, 180));
-    structLabel.setFont(12.0f);
+    structLabel.setFont(Fonts::getFont(13.0f));
 
     // frequency & transposition
     addAndMakeVisible(freqSlider);
@@ -101,7 +101,7 @@ PeaksAudioProcessorEditor::PeaksAudioProcessorEditor (PeaksAudioProcessor& p, Pe
     transLabel.setText("Transposition", juce::dontSendNotification);
     transLabel.setJustificationType(juce::Justification::centred);
     transLabel.setColour(juce::Label::textColourId, juce::Colour(100, 99, 102));
-    transLabel.setFont(12.0f);
+    transLabel.setFont(Fonts::getFont(13.0f));
 
     addAndMakeVisible(transSlider);
     transSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
@@ -167,13 +167,13 @@ PeaksAudioProcessorEditor::PeaksAudioProcessorEditor (PeaksAudioProcessor& p, Pe
     rateLabel.setText("R:", juce::dontSendNotification);
     rateLabel.setJustificationType(juce::Justification::right);
     rateLabel.setColour(juce::Label::textColourId, juce::Colour(100, 99, 102));
-    rateLabel.setFont(11.0f);
+    rateLabel.setFont(Fonts::getFont(12.0f));
 
     addAndMakeVisible(ampLabel);
     ampLabel.setText("A:", juce::dontSendNotification);
     ampLabel.setJustificationType(juce::Justification::right);
     ampLabel.setColour(juce::Label::textColourId, juce::Colour(100, 99, 102));
-    ampLabel.setFont(11.0f);
+    ampLabel.setFont(Fonts::getFont(12.0f));
     
     //==============================================================================
     // add listener
@@ -199,29 +199,29 @@ PeaksAudioProcessorEditor::~PeaksAudioProcessorEditor()
 void PeaksAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // background color
-    g.fillAll(juce::Colour(238, 234, 222));
+    g.fillAll(Colours::editorBackground);
 
     // main graphics background color
     juce::Path maingraphicsPath, controlsPath, lfoPath;
     
     maingraphicsPath.addRoundedRectangle(183, 8, 358, 164, 6.0f);
-    g.setColour(juce::Colour(228, 224, 212));
+    g.setColour(Colours::lightCream);
     g.fillPath(maingraphicsPath);
 
-    g.setColour(juce::Colour(223, 219, 207));
+    g.setColour(Colours::lightCreamShadow);
     g.strokePath(maingraphicsPath, juce::PathStrokeType(1.5f));
 
     //==============================================================================
     controlsPath.addRoundedRectangle(183, 182, 358, 50, 4.0f);
-    g.setColour(juce::Colour(100, 99, 102));
+    g.setColour(Colours::darkGrey);
     g.fillPath(controlsPath);
-    g.setColour(juce::Colour(95, 94, 97));
+    g.setColour(Colours::darkGreyShadow);
     g.strokePath(controlsPath, juce::PathStrokeType(1.5f));
 
     lfoPath.addRoundedRectangle(8, 182, 165, 50, 4.0f);
-    g.setColour(juce::Colour(228, 224, 212));
+    g.setColour(Colours::lightCream);
     g.fillPath(lfoPath);
-    g.setColour(juce::Colour(223, 219, 207));
+    g.setColour(Colours::lightCreamShadow);
     g.strokePath(lfoPath, juce::PathStrokeType(1.5f));
 
     //==============================================================================
@@ -298,10 +298,10 @@ void PeaksAudioProcessorEditor::resized()
     //==============================================================================
     // lfo
     lfoModeSlider.setBounds(12, 182, 60, 15);
-    lfoRateHzSlider.setBounds(65, 182, 60, 15);
-    lfoRateBPMSlider.setBounds(65, 182, 60, 15);
-    lfoRateRatioSlider.setBounds(65, 182, 60, 15);
-    rateLabel.setBounds(47, 182, 25, 15);
+    lfoRateHzSlider.setBounds(60, 182, 60, 15);
+    lfoRateBPMSlider.setBounds(60, 182, 60, 15);
+    lfoRateRatioSlider.setBounds(60, 182, 60, 15);
+    rateLabel.setBounds(42, 182, 25, 15);
     
     lfoAmpSlider.setBounds(125, 182, 50, 15);
     ampLabel.setBounds(107, 182, 25, 15);

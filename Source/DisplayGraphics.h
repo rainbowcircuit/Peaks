@@ -1,8 +1,8 @@
 /*
   ==============================================================================
 
-    MainGraphics.h
-    Created: 5 Oct 2024 12:17:47pm
+    Graphics.h
+    Created: 11 Nov 2024 8:02:36pm
     Author:  Takuma Matsui
 
   ==============================================================================
@@ -10,7 +10,9 @@
 
 #pragma once
 #include <JuceHeader.h>
+#include "LookAndFeel.h"
 #include "PluginProcessor.h"
+//==============================================================================
 
 class MainGraphics : public juce::Component, juce::AudioProcessorParameter::Listener
 {
@@ -48,3 +50,32 @@ private:
     //==============================================================================
     PeaksAudioProcessor audioProcessor;
 };
+
+
+
+
+
+
+//==================================================================================
+
+class LFOGraphics : public juce::Component, juce::AudioProcessorParameter::Listener
+{
+public:
+    float lfoRate = 3.0f, lfoAmp = 30.0f, lfoMode;
+    
+    LFOGraphics();
+    ~LFOGraphics();
+    void paint(juce::Graphics& g) override;
+    void updateValues(float newMode, float newRateInHz, float newRateInBPM, float newRateInRatio, float newAmp);
+    
+    
+private:
+    void parameterValueChanged(int parameterIndex, float newValue) override;
+    void parameterGestureChanged(int parameterIndex, bool gestureIsStarting) override {};
+    
+    juce::Atomic<bool> parametersChanged { false };
+    PeaksAudioProcessor audioProcessor;
+
+};
+
+

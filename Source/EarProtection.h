@@ -1,5 +1,4 @@
 #pragma once
-
 #include <JuceHeader.h>
 
 // Silences the buffer if bad or loud values are detected in the output buffer.

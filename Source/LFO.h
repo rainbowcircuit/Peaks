@@ -69,13 +69,12 @@ public:
 
     float generateWaveform()
     {
-        phase = fastSin.sin(M_PI * 2.0f * phase);
+        phase = sin(juce::MathConstants<float>::pi * 2.0f * phase);
         float waveform = pow(2.0f, (amp/10.0f) * phase);
         return waveform;
     }
         
 private:
-    juce::dsp::FastMathApproximations fastSin;
     float sampleRate;
     float phase = 0.0f;
     float amp = 0.0f;

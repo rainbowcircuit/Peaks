@@ -7,8 +7,6 @@ void Peaks::prepareToPlay(float sampleRate, juce::AudioPlayHead* playhead)
     for(int i = 0; i < 2; i++){
         svfLP[i].reset();
         svfLP[i].setSampleRate(sampleRate);
-        combDelay[i].setMaximumDelayInSamples(sampleRate);
-        combDelay[i].reset();
     }
     lfo.tempo(playhead);
     lfo.reset();
@@ -68,10 +66,8 @@ void Peaks::setAmpValue(float newAmplitude){
     amplitude = newAmplitude;
 }
 
-void Peaks::setStiffnessValues(float newPosition, float newStructure)
-{
-    position = newPosition;
-    
+void Peaks::setStructValues(float newStructure)
+{    
     float structScaled = newStructure/100.0f + 0.15f;
     for (int i = 0; i < 8; i++){
         ampVal[i] = 1.0f - abs(sin((i + 1) * structScaled));
@@ -81,24 +77,7 @@ void Peaks::setStiffnessValues(float newPosition, float newStructure)
     }
 }
 
-
 //==============================================================================
-
-float Peaks::positionProcessSample(float input, float amount, int channel) noexcept
-{
-    float filterCutoff = abs(amount - 50.0f);
-
-    svfLP[channel].setCoefficients(filterCutoff * 150 + 12500, 5.0f);
-    float filterOut = svfLP[channel].processSample(input, 1);
-    combDelay[channel].write(filterOut);
-
-    float delayTime = amount * 10.22 + 1;
-    float delayOut = combDelay[channel].read(delayTime);
-
-    float positionOut = (delayOut * (1.0f - (amount / 100.0f))) + input;
-    return positionOut;
-}
-
 
 float Peaks::softClipProcessSample (float input) noexcept
 {
@@ -113,7 +92,6 @@ void Peaks::setFMValues(int newMode, float newRateInHz, float newRateInBPM, floa
     lfoRateInRatio = newRateInRatio;
     lfoAmp = newAmp;
 }
-
 
 void Peaks::processBlock(juce::AudioBuffer<float>& buffer) noexcept
 {
